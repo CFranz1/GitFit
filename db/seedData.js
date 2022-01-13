@@ -3,7 +3,11 @@
 const {client} = require('./client.js')
 const {
   createUser,
-  getActivityById
+  createActivity,
+  createRoutine,
+  getRoutinesWithoutActivities,
+  getAllActivities,
+  addActivityToRoutine
 } = require('./index.js');
 
 async function dropTables() {
@@ -49,8 +53,8 @@ async function createTables() {
   await client.query(`
   CREATE TABLE routineActivities(
     Id SERIAL PRIMARY KEY,
-    "routineId" INTEGER REFERENCES routines(Id) UNIQUE,
-    "activityId" INTEGER REFERENCES activities(Id) UNIQUE,
+    "routineId" INTEGER REFERENCES routines(Id),
+    "activityId" INTEGER REFERENCES activities(Id),
     duration INTEGER,
     count INTEGER);
   `)

@@ -1,4 +1,4 @@
-const {client} = require('client.js')
+const {client} = require('./client.js')
 
 async function getActivityById(id) {
 
@@ -27,13 +27,13 @@ async function getAllActivities(id) {
 async function createActivity ({ name, description }) {
 
     try{
-      const { rows } = await client.query(`
+      const { rows : [activity] } = await client.query(`
       INSERT INTO activities(name, description)
       VALUES ($1, $2)
       ON CONFLICT (name) DO NOTHING
       RETURNING *;
       `, [name, description]);
-      return rows
+      return activity;
   }catch(err){
       console.log('trouble in createActivity!',err)
   }

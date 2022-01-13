@@ -1,5 +1,5 @@
 const {client} = require('./client.js');
-const bcrypt = require('bcrypt');
+const {bcrypt} = require('bcrypt');
 
 async function createUser({username, password}){
     // they gave us this code in https://learn.fullstackacademy.com/workshop/5eb185416a449000046b2bf9/content/5eb187176a449000046b2c56/text
@@ -12,13 +12,13 @@ async function createUser({username, password}){
     // });
     // });
     try{
-        const { rows } = await client.query(`
+        const { rows : [user] } = await client.query(`
         INSERT INTO users(username, password)
         VALUES($1, $2)
         ON CONFLICT (username) DO NOTHING
         RETURNING *;
         `, [username, password]);
-        return rows
+        return user
     }catch(err){
         console.log('trouble in createUser!',err)
     }
@@ -50,8 +50,8 @@ async function getUserById(id){
     }
 }
 
-async function getUserbyUserName(username){
-    //did not test yet
+async function getUserByUsername(username){
+    
     try{
         const { rows } = await client.query(`
         SELECT *
@@ -66,7 +66,7 @@ async function getUserbyUserName(username){
 
 module.exports = {
     createUser,
-    getUser,
+    //getUser,
     getUserById,
     getUserByUsername
 }

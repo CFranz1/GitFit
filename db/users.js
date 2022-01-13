@@ -13,8 +13,8 @@ async function createUser({username, password}){
     // });
     try{
         const { rows } = await client.query(`
-        INSERT INTO users(username, password) 
-        VALUES($1, $2) 
+        INSERT INTO users(username, password)
+        VALUES($1, $2)
         ON CONFLICT (username) DO NOTHING
         RETURNING *;
         `, [username, password]);
@@ -65,5 +65,8 @@ async function getUserbyUserName(username){
 }
 
 module.exports = {
-    createUser
+    createUser,
+    getUser,
+    getUserById,
+    getUserByUsername
 }

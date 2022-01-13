@@ -2,7 +2,8 @@
 // const { } = require('./');
 const {client} = require('./client.js')
 const {
-  createUser
+  createUser,
+  getActivityById
 } = require('./index.js');
 
 async function dropTables() {
@@ -14,7 +15,7 @@ async function dropTables() {
           DROP TABLE IF EXISTS routines;
           DROP TABLE IF EXISTS activities;
           DROP TABLE IF EXISTS users;
-        `);  
+        `);
 
 }
 
@@ -55,9 +56,9 @@ async function createTables() {
   `)
 }
 
-/* 
+/*
 
-DO NOT CHANGE ANYTHING BELOW. This is default seed data, and will help you start testing, before getting to the tests. 
+DO NOT CHANGE ANYTHING BELOW. This is default seed data, and will help you start testing, before getting to the tests.
 
 */
 
@@ -135,55 +136,55 @@ async function createInitialRoutineActivities() {
         routineId: bicepRoutine.id,
         activityId: bicep1.id,
         count: 10,
-        duration: 5 
+        duration: 5
       },
       {
         routineId: bicepRoutine.id,
         activityId: bicep2.id,
         count: 10,
-        duration: 8 
+        duration: 8
       },
       {
         routineId: chestRoutine.id,
         activityId: chest1.id,
         count: 10,
-        duration: 8 
+        duration: 8
       },
       {
         routineId: chestRoutine.id,
         activityId: chest2.id,
         count: 10,
-        duration: 7 
+        duration: 7
       },
       {
         routineId: legRoutine.id,
         activityId: leg1.id,
         count: 10,
-        duration: 9 
+        duration: 9
       },
       {
         routineId: legRoutine.id,
         activityId: leg2.id,
         count: 10,
-        duration: 10 
+        duration: 10
       },
       {
         routineId: legRoutine.id,
         activityId: leg3.id,
         count: 10,
-        duration: 7 
+        duration: 7
       },
       {
         routineId: cardioRoutine.id,
         activityId: leg2.id,
         count: 10,
-        duration: 10 
+        duration: 10
       },
       {
         routineId: cardioRoutine.id,
         activityId: leg3.id,
         count: 10,
-        duration: 15 
+        duration: 15
       },
     ]
     const routineActivities = await Promise.all(routineActivitiesToCreate.map(addActivityToRoutine));

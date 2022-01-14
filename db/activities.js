@@ -40,9 +40,6 @@ async function createActivity ({ name, description }) {
   }
 }
 async function updateActivity ({ id, name, description }) {
-
-  console.log("%" + id + " " + name + " "+ description );
-
     try{
       const { rows: [activities]} = await client.query(`
         UPDATE activities

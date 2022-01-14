@@ -39,12 +39,12 @@ async function getUserById(id){
     //did not test yet
 
     try{
-        const { rows } = await client.query(`
+        const { rows : [user] } = await client.query(`
         SELECT ID,username
         FROM users
         WHERE ID=($1);
         `, [id]);
-        return rows
+        return user
     }catch(err){
         console.log('trouble in createUser!',err)
     }

@@ -1,18 +1,5 @@
 const {client} = require('./client.js')
 
-async function getActivityById(id) {
-
-    try{
-      const { rows } = await client.query(`
-      SELECT *
-      FROM activities
-      WHERE ID=($1);
-      `, [id]);
-      return rows
-  }catch(err){
-      console.log('trouble in getActivityById!',err)
-  }
-}
 async function getAllActivities(id) {
 
     try{
@@ -24,6 +11,20 @@ async function getAllActivities(id) {
       console.log('trouble in getAllActivities!',err)
   }
 }
+async function getActivityById(id) {
+
+    try{
+      const { rows : [activity] } = await client.query(`
+      SELECT *
+      FROM activities
+      WHERE ID=($1);
+      `, [id]);
+      return activity
+  }catch(err){
+      console.log('trouble in getActivityById!',err)
+  }
+}
+
 async function createActivity ({ name, description }) {
 
     try{
@@ -40,14 +41,16 @@ async function createActivity ({ name, description }) {
 }
 async function updateActivity ({ id, name, description }) {
 
+  console.log("%" + id + " " + name + " "+ description );
+
     try{
-      const { rows } = await client.query(`
-      UPDATE activities(name, description)
-      SET ($1, $2)
-      WHERE id=${id}
-      RETURNING *;
-      `, [name, description]);
-      return rows
+      const { rows: [activities]} = await client.query(`
+        UPDATE activities
+        SET name = $1, description = $2
+        WHERE id=${id}
+        RETURNING *;
+        `, [name, description]);
+      return activities
   }catch(err){
       console.log('trouble in updateActivity!',err)
   }

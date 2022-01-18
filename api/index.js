@@ -4,6 +4,10 @@
 const express = require('express');
 const apiRouter = express.Router();
 
+apiRouter.get("/health" , (req, res, next)=>{
+    res.send("Server is healthy")
+})
+
 
 
 module.exports = apiRouter;

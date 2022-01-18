@@ -2,11 +2,11 @@ const {client} = require('./client.js');
 
 async function getRoutineById(id) {
   try {
-    const {rows} = await client.query(`
+    const {rows :[routine]} = await client.query(`
       SELECT * FROM routines
       WHERE id=${id};
     `)
-    return rows;
+    return routine;
   } catch (err) {
     console.log('trouble in getRoutineById!', err);
   }
@@ -203,7 +203,6 @@ async function getPublicRoutinesByActivity({id}) {
     let updatedRoutines3 = [];
     updatedRoutines2.forEach(routineElement=>{
       routineElement.activities.forEach(activitiesElement=>{
-        console.log(activitiesElement.activityId)
         if(activitiesElement.activityId === id){
           updatedRoutines3.push(routineElement)
         }
@@ -227,13 +226,65 @@ async function createRoutine({creatorId,isPublic,name,goal}){
   console.log('trouble in createRoutine', err);
   }
 }
+async function updateRoutine({id,isPublic,name,goal}){
+
+  let setString;
+  if (isPublic)
+    setString = `"isPublic"='${isPublic}'`;
+
+  if (name){
+    if (setString)
+      setString = setString + ", " + `"name"='${name}'`;
+    else
+      setString = `"name"='${name}'`;
+  }
+
+  if (goal){
+    if (setString)
+      setString = setString + ", " + `"goal"='${goal}'`;
+    else    
+      setString = `"name"='${goal}'`;
+  }
+
+  try {
+    const {rows : [routine]} = await client.query(`
+    UPDATE routines
+    SET ${ setString }
+    WHERE id=${ id }
+    RETURNING *;
+    `)
+    return routine;
+  }catch(err){
+  console.log('trouble in updatingRoutine', err);
+  }
+}
+async function destroyRoutine(id){
+
+
+
+  try {
+    await client.query(`
+    DELETE FROM routines
+    WHERE routines.id = ${id};
+    `)
+    await client.query(`
+    DELETE FROM routineActivities
+    WHERE "routineId"=${id};
+    `)
+  }catch(err){
+  console.log('trouble in destroyRoutine', err);
+  }
+}
 
 module.exports={
   createRoutine,
+  getRoutineById,
   getRoutinesWithoutActivities,
   getAllRoutines,
   getAllPublicRoutines,
   getAllRoutinesByUser,
   getPublicRoutinesByUser,
-  getPublicRoutinesByActivity
+  getPublicRoutinesByActivity,
+  updateRoutine,
+  destroyRoutine
 }

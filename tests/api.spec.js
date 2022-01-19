@@ -205,7 +205,6 @@ describe('API', () => {
     describe('DELETE /routines/:routineId (**)', () => {
       it('Hard deletes a routine. Makes sure to delete all the routineActivities whose routine is the one being deleted.', async () => {
         const {data: deletedRoutine} = await axios.delete(`${API_URL}/api/routines/${routineToCreateAndUpdate.id}`, { headers: {'Authorization': `Bearer ${token}`} });
-        console.log(deletedRoutine);
         const shouldBeDeleted = await getRoutineById(deletedRoutine.id);
         expect(deletedRoutine.id).toBe(routineToCreateAndUpdate.id);
         expect(deletedRoutine.name).toBe(routineToCreateAndUpdate.name);

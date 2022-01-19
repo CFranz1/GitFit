@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllPublicRoutines, createRoutine, getRoutineById, updateRoutine, destroyRoutine } = require('../db');
+const { getAllPublicRoutines, createRoutine, getRoutineById, updateRoutine, destroyRoutine, addActivityToRoutine, getRoutineActivitiesByRoutine } = require('../db');
 const routinesRouter = express.Router();
 const { requireUser } = require('./utils');
 
@@ -45,5 +45,32 @@ routinesRouter.delete('/:routineId', requireUser, async (req,res,next)=>{
         next(error);
     }
 })
+routinesRouter.post('/:routineId/activities', async (req,res,next)=>{
+    //not sure why but they pass you routineId through the body and the params 
+    //but running api test they routineId's dont match and if you use the one
+    //from the body the test fails.
+    let routineId= req.params.routineId;
+    let {activityId, count, duration} = req.body;
+    let info ={}
+    info['activityId']=activityId;
+    info['routineId']=routineId;
+    info['count']=count;
+    info['duration']=duration;    
+    try{
+        //preventing duplicates
+        let check = await getRoutineActivitiesByRoutine({ 'id' : routineId});
+        check.forEach((element) =>{
+            if (element.activityId == activityId)
+                throw new Error('Activity already added to Routine');
+        })            
+        let updatedRoutineActivity = await addActivityToRoutine(info);
+        res.send(updatedRoutineActivity);
+    }catch(error){
+        next(error);
+    }
+})
+
+
+
 
 module.exports = routinesRouter;

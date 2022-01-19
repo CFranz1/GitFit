@@ -2,9 +2,8 @@ const {client} = require('./client.js');
 const bcrypt = require('bcrypt');
 const SALT_COUNT = 10;
 
-async function createUser({username, password}){
+async function createUser({username, password}){    
     const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
-
     try{
         const { rows : [user] } = await client.query(`
         INSERT INTO users(username, password)
@@ -26,8 +25,7 @@ async function getUser({username,password}){
         delete user.password;
         return user;
     } else 
-        return false;
-    
+        return false;    
 }
 
 

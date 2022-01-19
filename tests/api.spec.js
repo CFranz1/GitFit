@@ -13,7 +13,7 @@ const { JWT_SECRET = 'neverTell' } = process.env;
 
 const { rebuildDB } = require('../db/seedData');
 const { getUserById, createActivity, getPublicRoutinesByUser, getPublicRoutinesByActivity, getAllPublicRoutines, getRoutineById, createRoutine, getRoutineActivityById } = require('../db');
-const client = require('../db/client')
+const {client} = require('../db/client')
 
 describe('API', () => {
   let token, registeredUser;
@@ -37,6 +37,8 @@ describe('API', () => {
       let tooShortSuccess, tooShortResponse;
       beforeAll(async() => {
         const successResponse = await axios.post(`${API_URL}/api/users/register`, newUser);
+        console.log('successRespons = %')
+        console.log(successResponse)
         registeredUser = successResponse.data.user;
         try {
           tooShortSuccess = await axios.post(`${API_URL}/api/users/register`, newUserShortPassword);
@@ -203,6 +205,7 @@ describe('API', () => {
     describe('DELETE /routines/:routineId (**)', () => {
       it('Hard deletes a routine. Makes sure to delete all the routineActivities whose routine is the one being deleted.', async () => {
         const {data: deletedRoutine} = await axios.delete(`${API_URL}/api/routines/${routineToCreateAndUpdate.id}`, { headers: {'Authorization': `Bearer ${token}`} });
+        console.log(deletedRoutine);
         const shouldBeDeleted = await getRoutineById(deletedRoutine.id);
         expect(deletedRoutine.id).toBe(routineToCreateAndUpdate.id);
         expect(deletedRoutine.name).toBe(routineToCreateAndUpdate.name);

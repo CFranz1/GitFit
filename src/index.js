@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
-
-
-
-
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import{Header} from './components/Header/header'
 
 
 function App(){
@@ -14,8 +12,13 @@ function App(){
 
     
     return(
-        <div>its ya app doing its thang</div>
-
+        <div className='app'>
+            <Router>
+                <Header
+                
+                />
+            </Router>
+        </div>
     )
    
 }

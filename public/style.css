@@ -1,0 +1,12 @@
+#Header-Container{
+    background-color: black;
+    color: #ffa62b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.Header-Link{
+    text-decoration: none;
+    font-size: xx-large;
+    margin: 10px;
+}

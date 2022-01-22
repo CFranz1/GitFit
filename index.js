@@ -27,9 +27,11 @@ server.use('/api', apiRouter);
 //   res.send("Worlds Best 404 page")
 // })
 
-server.use((error, req, res, next) => {
-  //console.error(error.stack)
-  res.status(500).send('Something broke!')
+server.use((err, req, res, next) => {
+  //console.log(error)
+  res.status(500).send({'error' : err.stack});
+  
+  
 });
 
 server.listen(PORT, () => {

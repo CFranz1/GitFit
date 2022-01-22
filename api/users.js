@@ -9,17 +9,17 @@ usersRouter.post('/register', async (req, res, next) => {
   const {username, password} = req.body;
   try {
     if (!username || !password) {
-      throw new Error('username and password must be submitted')
+      res.send( {'error' : 'username and password must be submitted'});
     }
     if (password.length < 8) {
-      throw new Error('Password must be at least 8 characters');
+      res.send({'error' : 'Password must be at least 8 characters'});
     }
     const user = await getUserByUsername(username);
     if (user) {
-      throw new Error('Username already exists');
+      res.send({'error' : 'Username already exists'});
     } else {      
       let user = await createUser(req.body);
-      res.send({'user' : user})
+      res.send({'success' : user})
     }
   } catch (error) {
     next(error);
@@ -27,19 +27,20 @@ usersRouter.post('/register', async (req, res, next) => {
 })
 usersRouter.post('/login', async (req, res, next) => {
   const { username, password } = req.body;
+  console.log('login post is getting called')
   if (!username || !password) {
-    throw new Error('username and password must be submitted')
+    res.send({'error' : 'username and password must be submitted'})
   }
   try {
     const user = await getUser(req.body);
     if (user) {
       const token = jwt.sign({ id: user.id , username: user.username}, process.env.JWT_SECRET)
-      res.send({ message: "you're logged in!", token: token });
+      res.send({ message: `Welcome back ${username}!`, token: token });
     } else {
-      throw new Error('password incorrect')
+      res.send({'error' : 'Username or Password Incorrect!'})
     }
-  } catch(error) {
-    next(error);
+  } catch(err) {
+    next(err)
   }
 });
 usersRouter.get('/me', requireUser, async (req,res,next)=>{

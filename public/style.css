@@ -1,12 +1,91 @@
+.app{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.897);
+    width: 100vw;
+    height: 100vh;
+}
 #Header-Container{
     background-color: black;
-    color: #ffa62b;
+    color: #ffa72bee;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
+    width: 100%;
+}
+#CompanyInfo{
+    display:flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+}
+#Logo{
+    margin: 15px;
+}
+#CompanySlogan{
+    font-family: 'Josefin Sans', sans-serif;
 }
 .Header-Link{
     text-decoration: none;
+    color: rgba(245, 245, 245, 0.829);
     font-size: xx-large;
     margin: 10px;
+    font-family: 'Josefin Sans', sans-serif;
+}
+#Logo{
+    border-radius:50%;
+    height: 65px;
+    
+}
+#Login-Page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+}
+#Login-Form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+#Login-Form *{
+    margin-bottom: 30px;
+}
+form input{
+    width: 270px;
+    height: 40px;
+    border-radius: 40px;
+    text-align: center;
+} 
+form h1{
+    color: rgba(245, 245, 245, 0.829);
+    font-family: 'Josefin Sans', sans-serif;
+}
+form button{
+    width: 270px;
+    height: 40px;
+    border-radius: 40px;
+    background-color: #D0FD3E;
+}
+form a{
+    width: 270px;
+    height: 40px;
+    border-radius: 40px;
+    background-color: #D0FD3E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: rgb(31, 29, 29);
+}
+form a:hover{
+    background-color: #d0fd3eb9;
+}
+form button:hover{
+    background-color: #d0fd3eb9;
+}
+.Header-Link:hover{
+    color: #ffa72bee;
 }

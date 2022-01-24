@@ -6,7 +6,8 @@ const { JWT_SECRET } = process.env;
 const { requireUser } = require('./utils');
 
 usersRouter.post('/register', async (req, res, next) => {
-  const {username, password} = req.body;
+  const {username, password} = req.body.user;
+  
   try {
     if (!username || !password) {
       res.send( {'error' : 'username and password must be submitted'});
@@ -18,7 +19,7 @@ usersRouter.post('/register', async (req, res, next) => {
     if (user) {
       res.send({'error' : 'Username already exists'});
     } else {      
-      let user = await createUser(req.body);
+      let user = await createUser(req.body.user);
       res.send({'success' : user})
     }
   } catch (error) {

@@ -1,12 +1,7 @@
 import {Link, useNavigate} from "react-router-dom"
-import { logInUser } from "../AjaxHelpers/AjaxHelpers.js"
-
-
-
+import { logInUser, registerUser } from "../AjaxHelpers/AjaxHelpers.js"
 export let LogInPage = (props) => {
-    let setUserToken = props.setUserToken;
-    let setUserInfo = props.setUserInfo;
-    let setIsLoggedIn = props.setIsLoggedIn;
+    const {setUserToken , setUserInfo, setIsLoggedIn} = props;
     const navigate = useNavigate();
     async function handleSubmit(e){
         e.preventDefault();
@@ -44,9 +39,7 @@ export let LogInPage = (props) => {
 }
 
 export let Register = (props) => {
-    let setUserToken = props.setUserToken;
-    let setUserInfo = props.setUserInfo;
-    let setIsLoggedIn = props.setIsLoggedIn;
+    const {setUserToken , setUserInfo, setIsLoggedIn} = props;
     const navigate = useNavigate();
     async function handleSubmit(e){
         e.preventDefault();
@@ -59,7 +52,7 @@ export let Register = (props) => {
         if (password != passwordConfirm)
             return alert('Password must match Password Confirmation!')        
         user['username']=username;
-        user['password']=password;        
+        user['password']=password;
         let response = await registerUser(user);
         if (response.error){
             return alert(response.error)

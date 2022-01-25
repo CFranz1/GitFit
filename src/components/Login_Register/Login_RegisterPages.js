@@ -1,3 +1,4 @@
+import { token } from "morgan";
 import {Link, useNavigate} from "react-router-dom"
 import { logInUser, registerUser } from "../AjaxHelpers/AjaxHelpers.js"
 export let LogInPage = (props) => {
@@ -17,9 +18,12 @@ export let LogInPage = (props) => {
         }
         else{
             setUserToken(response.token);
-            setUserInfo(user);
+            setUserInfo(response.user);
             alert(response.message);
             setIsLoggedIn(true);
+            
+            // localStorage.setItem("user", JSON.stringify(response.user));
+            // localStorage.setItem("token", JSON.stringify(response.token));
             navigate('/Home');
             return
         }

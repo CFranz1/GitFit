@@ -1,9 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import {Header} from './components/Header/header'
 import {LogInPage,Register} from './components/Login_Register/Login_RegisterPages'
-import {Routines} from './components/Routines/Routines'
+import {Routines, MyRoutines} from './components/Routines/Routines'
 import {HomePage} from './components/HomePage/HomePage'
 import {Activities} from './components/Activities/Activities'
 
@@ -12,8 +12,22 @@ import {Activities} from './components/Activities/Activities'
 function App(){
 
     const[isLoggedIn, setIsLoggedIn] = useState(false);
-    const[userInfo, setUserInfo] = useState({username: "" , password: ""});
+    const[userInfo, setUserInfo] = useState({id: "",username: ""});
     const[userToken, setUserToken] = useState('');
+
+    // //tries to pull token and user info set token and user info
+    // useEffect(()=>{
+    // const retrivedUser = localStorage.getItem("user");
+    // if (retrivedUser) {
+    //   const userObj1 = JSON.parse(retrivedUser);
+    //   setUserInfo(userObj1);
+    // }
+    // const retrivedToken = localStorage.getItem("token");
+    // if (retrivedToken) {
+    //   const userObj2 = JSON.parse(retrivedToken);
+    //   setUserToken(userObj2);
+    // }
+    // },[])
 
     
     return(
@@ -29,7 +43,12 @@ function App(){
                     
                     />}/>
                     <Route path='/Routines' element={<Routines
-                    
+                    userInfo={userInfo} isLoggedIn={isLoggedIn}
+                    userToken={userToken}
+                    />}/>
+                    <Route path='/MyRoutines' element={<MyRoutines
+                    userInfo={userInfo} isLoggedIn={isLoggedIn}
+                    userToken={userToken}
                     />}/>
                     <Route path='/Activities' element={<Activities
                     

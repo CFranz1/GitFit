@@ -24,7 +24,7 @@ export let Header = (props) => {
             <nav id='Tag-Links'>                
                 <NavLink to='/Home' className="Header-Link" style={({isActive})=> isActive ? activeStyle : undefined}>Home</NavLink>
                 <NavLink to='/Routines' className="Header-Link" style={({isActive})=> isActive ? activeStyle : undefined}>Routines</NavLink>
-                {isLoggedIn? <NavLink to='/My Routines' className='Header-Link' style={({isActive})=> isActive ? activeStyle : undefined}>My Routines</NavLink> : null}
+                {isLoggedIn ? <NavLink to='/MyRoutines' className="Header-Link" style={({isActive})=> isActive ? activeStyle : undefined}>My Routines</NavLink> : null }
                 <NavLink to='/Activities' className="Header-Link" style={({isActive})=> isActive ? activeStyle : undefined}>Activities</NavLink>
                 {isLoggedIn? <NavLink to='/Home' className='Header-Link' onClick={Logout}>Logout</NavLink> : <NavLink to='/Login' className="Header-Link" style={({isActive})=> isActive ? activeStyle : undefined}>Login</NavLink> }
                 {isLoggedIn? null : <NavLink to='/Register' className='Header-Link' style={({isActive})=> isActive ? activeStyle : undefined}>Register</NavLink>}

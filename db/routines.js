@@ -275,6 +275,17 @@ async function destroyRoutine(id){
   console.log('trouble in destroyRoutine', err);
   }
 }
+async function getRoutinebyName(name){
+  try {
+    const {rows :[routine]} = await client.query(`
+      SELECT * FROM routines
+      WHERE name=$1;
+    `,[name])
+    return routine;
+  } catch (err) {
+    console.log('trouble in getRoutineById!', err);
+  }
+}
 
 module.exports={
   createRoutine,
@@ -286,5 +297,6 @@ module.exports={
   getPublicRoutinesByUser,
   getPublicRoutinesByActivity,
   updateRoutine,
-  destroyRoutine
+  destroyRoutine,
+  getRoutinebyName
 }

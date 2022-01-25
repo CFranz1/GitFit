@@ -62,4 +62,55 @@ export async function getAllRoutines(){
   }   
 }
 
+export async function createRoutine(info,userToken){
+  try{
+    const response = await fetch(`${APIURL}/routines/`,{
+      method: "POST",
+      headers:{
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${userToken}`
+      },
+      body: JSON.stringify(info)
+    })
+    const result= await response.json();
+    return result;
+  }catch(err){
+    console.log('Trouble creatingRoutine!')
+  }
+}
+
+export async function destroyRoutine(routineId,userToken){
+  try{
+    const response = await fetch(`${APIURL}/routines/${routineId}`,{
+      method: "DELETE",
+      headers:{
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${userToken}`
+      }
+    })
+    const result= await response.json();
+    return result;
+  }catch(err){
+    console.log('Trouble creatingRoutine!')
+  }
+}
+
+export async function editRoutine(info,userToken){
+  try{
+    let routineId = info.routineId;
+    const response = await fetch(`${APIURL}/routines/${routineId}`,{
+      method: "PATCH",
+      headers:{
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${userToken}`
+      },
+      body: JSON.stringify(info)
+    })
+    const result= await response.json();
+    return result;
+  }catch(err){
+    console.log('Trouble creatingRoutine!')
+  }
+}
+
 //routine_activities routes

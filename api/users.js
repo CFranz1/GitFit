@@ -28,7 +28,6 @@ usersRouter.post('/register', async (req, res, next) => {
 })
 usersRouter.post('/login', async (req, res, next) => {
   const { username, password } = req.body;
-  console.log('login post is getting called')
   if (!username || !password) {
     res.send({'error' : 'username and password must be submitted'})
   }
@@ -36,7 +35,7 @@ usersRouter.post('/login', async (req, res, next) => {
     const user = await getUser(req.body);
     if (user) {
       const token = jwt.sign({ id: user.id , username: user.username}, process.env.JWT_SECRET)
-      res.send({ message: `Welcome back ${username}!`, token: token });
+      res.send({ message: `Welcome back ${username}!`, token: token, 'user': user });
     } else {
       res.send({'error' : 'Username or Password Incorrect!'})
     }

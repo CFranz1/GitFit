@@ -1,136 +1,170 @@
-.app{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.897);
-    width: 100vw;
-    min-height: 100vh;
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.897);
+  width: 100vw;
+  min-height: 100vh;
 }
-#Header-Container{
-    background-color: black;
-    color: #ffa72bee;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    width: 100%;
+#Header-Container {
+  background-color: black;
+  color: #ffa72bee;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
 }
-#CompanyInfo{
-    display:flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
-    align-items: center;
+#CompanyInfo {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
 }
-#Logo{
-    margin: 15px;
+#Logo {
+  margin: 15px;
 }
-#CompanySlogan{
-    font-family: 'Josefin Sans', sans-serif;
+#CompanySlogan {
+  font-family: "Josefin Sans", sans-serif;
 }
-.Header-Link{
-    text-decoration: none;
-    color: rgba(245, 245, 245, 0.829);
-    font-size: xx-large;
-    margin: 10px;
-    font-family: 'Josefin Sans', sans-serif;
+.Header-Link {
+  text-decoration: none;
+  color: rgba(245, 245, 245, 0.829);
+  font-size: xx-large;
+  margin: 10px;
+  font-family: "Josefin Sans", sans-serif;
 }
-#Logo{
-    border-radius:50%;
-    height: 65px;
-    
+#Logo {
+  border-radius: 50%;
+  height: 65px;
 }
-#Login-Page{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 60%;
+#Login-Page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60%;
 }
-#Login-Form{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
+#Login-Form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
-#Login-Form *{
-    margin-bottom: 30px;
+#Login-Form * {
+  margin-bottom: 30px;
 }
-form input{
-    width: 270px;
-    height: 40px;
-    border-radius: 40px;
-    text-align: center;
-} 
-form h1{
-    color: rgba(245, 245, 245, 0.829);
-    font-family: 'Josefin Sans', sans-serif;
+form input {
+  width: 270px;
+  height: 40px;
+  border-radius: 40px;
+  text-align: center;
 }
-form button{
-    width: 270px;
-    height: 40px;
-    border-radius: 40px;
-    background-color: #D0FD3E;
+form h1 {
+  color: rgba(245, 245, 245, 0.829);
+  font-family: "Josefin Sans", sans-serif;
 }
-form a{
-    width: 270px;
-    height: 40px;
-    border-radius: 40px;
-    background-color: #D0FD3E;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    color: rgb(31, 29, 29);
+button {
+  width: 270px;
+  height: 40px;
+  border-radius: 40px;
+  background-color: #d0fd3e;
+  margin: 30px;
 }
-form a:hover{
-    background-color: #d0fd3eb9;
+form a {
+  width: 270px;
+  height: 40px;
+  border-radius: 40px;
+  background-color: #d0fd3e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: rgb(31, 29, 29);
 }
-form button:hover{
-    background-color: #d0fd3eb9;
+form a:hover {
+  background-color: #d0fd3eb9;
 }
-.Header-Link:hover{
-    color: #ffa72bee;
+button:hover {
+  background-color: #d0fd3eb9;
 }
-.Single-Routine{
-    margin: 20px;
-    border: 5px inset rgba(245, 245, 245, 0.829);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.Header-Link:hover {
+  color: #ffa72bee;
 }
-.ActivitiesTable{
-    width: 100%;
+.Single-Routine {
+  margin: 20px;
+  border: 5px inset rgba(245, 245, 245, 0.829);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
-.RoutineInfo{
-    color: rgba(245, 245, 245, 0.829);
+.ActivitiesTable {
+  width: 100%;
 }
-.ActivitiesInfo{
-    color: rgba(245, 245, 245, 0.829);
+.RoutineInfo {
+  color: rgba(245, 245, 245, 0.829);
+}
+.ActivitiesInfo {
+  color: rgba(245, 245, 245, 0.829);
 }
 th {
-    background-color: #d0fd3eb9;
+  background-color: #d0fd3eb9;
 }
-td{
-    border: 1px inset  #d0fd3eb9;
+td {
+  border: 1px inset #d0fd3eb9;
 }
-.a{
-    color: #d0fd3eb9;
+.a {
+  color: #d0fd3eb9;
 }
-table{
-    margin: 25px;
+table {
+  margin: 25px;
 }
-.spacer{
-    border: none;
-    background-color: rgba(0, 0, 0, 0);
-    width: 25px;
+.spacer {
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  width: 25px;
 }
-#ActivitiesPage{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: rgba(245, 245, 245, 0.829);
+#ActivitiesPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: rgba(245, 245, 245, 0.829);
 }
-#ActivityTable{
-    width: 80vw;
-    border-radius: 50%;
-    box-shadow: 0px 10px 30px 5px rgba(0, 0, 0, 0, 0.15);
+#ActivityTable {
+  width: 80vw;
+  border-radius: 50%;
+  box-shadow: 0px 10px 30px 5px rgba(0, 0, 0, 0, 0.15);
+}
+#RoutinesPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#NewRoutineForm {
+  border: 5px inset rgba(245, 245, 245, 0.829);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  width: 100%;
+}
+#isPublic {
+  height: 25px;
+  width: 25px;
+}
+#OutdatedPost {
+  border: 5px inset rgba(245, 245, 245, 0.829);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  width: 100%;
+}
+#UpdatingRoutineForm {
+  border: 5px inset rgba(245, 245, 245, 0.829);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  width: 100%;
 }

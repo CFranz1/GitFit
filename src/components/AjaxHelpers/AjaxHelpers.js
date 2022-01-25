@@ -113,4 +113,24 @@ export async function editRoutine(info,userToken){
   }
 }
 
+
+
+export async function addActivityToRoutine(info,userToken){
+  try{
+    let routineId = info.routineId;
+    const response = await fetch(`${APIURL}/routines/${routineId}/activities`,{
+      method: "POST",
+      headers:{
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${userToken}`
+      },
+      body: JSON.stringify(info)
+    })
+    const result= await response.json();
+    return result;
+  }catch(err){
+    console.log('Trouble creatingRoutine!')
+  }
+}
+
 //routine_activities routes

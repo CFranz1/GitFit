@@ -1,10 +1,22 @@
+html {
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+}
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
 .app {
+  margin: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.897);
-  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.9);
+  width: 100%;
   min-height: 100vh;
+  height: 100%;
 }
 #Header-Container {
   background-color: black;
@@ -41,16 +53,44 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 60%;
+  height: 85vh;
+  width: 100vw;
+  background-image: url("background.jpg");
+  background-position: top;
+  background-attachment: fixed;
+  background-size: cover;
 }
 #Login-Form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  position: absolute;
+  top: 450px;
+  left: 650px;
+  background-color: rgb(31, 29, 29);
+  border-radius: 10%;
 }
-#Login-Form * {
-  margin-bottom: 30px;
+#Register-Page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 85vh;
+  width: 100vw;
+  background-image: url("RegisterBackground.jpg");
+  background-position: absolute;
+  background-attachment: fixed;
+  background-size: cover;
+}
+#Register-Form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 110px;
+  left: 400px;
+  background-color: rgb(31, 29, 29);
+  border-radius: 10%;
+  width: 400px;
 }
 form input {
   width: 270px;
@@ -67,7 +107,18 @@ button {
   height: 40px;
   border-radius: 40px;
   background-color: #d0fd3e;
-  margin: 30px;
+  margin: 15px;
+}
+select {
+  width: 270px;
+  height: 40px;
+  border-radius: 40px;
+  background-color: rgba(245, 245, 245);
+  margin: 15px;
+  text-align: center;
+}
+input {
+  margin: 15px;
 }
 form a {
   width: 270px;
@@ -79,6 +130,7 @@ form a {
   justify-content: center;
   text-decoration: none;
   color: rgb(31, 29, 29);
+  margin: 15px;
 }
 form a:hover {
   background-color: #d0fd3eb9;
@@ -167,4 +219,24 @@ table {
   align-items: center;
   color: white;
   width: 100%;
+}
+form span {
+  font-family: "Josefin Sans", sans-serif;
+}
+.AddActivityToRoutine {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 5px inset #d0fd3eb9;
+  width: 60%;
+}
+#AddActivityForm {
+  border: 5px inset rgba(245, 245, 245, 0.829);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#HomePage h1 {
+  color: rgba(245, 245, 245, 0.829);
 }

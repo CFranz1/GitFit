@@ -11,8 +11,11 @@ export let Activities = (props) => {
   const [isAddingActivities, setIsAddingActivities] = useState([false]);
   const fetchData = async () => {
     const activities = await getAllActivities();
-    console.log(activities);
     setActivitiesToDisplay(activities);
+    console.log(" isaddingactivities")
+    console.log(isAddingActivities)
+    console.log("isLoggedIn")
+    console.log(isLoggedIn)
   };
   useEffect(() => {
     fetchData();
@@ -61,12 +64,9 @@ export let Activities = (props) => {
           );
         })}
       </table>
-      {isLoggedIn ? (
-        <button onClick={toggleAddActivityForm}>
-          {!isAddingActivities ? "Add Activity?" : "Cancel"}
-        </button>
-      ) : null}
-      {isAddingActivities ? (
+      {isLoggedIn ? (<button onClick={toggleAddActivityForm}>
+        {!isAddingActivities ? "Add Activity?" : "Cancel"} </button>) : null}
+      {isAddingActivities ?
         <form id="AddActivityForm">
           <h1>Create New Activity</h1>
           <h2>Name</h2>
@@ -78,7 +78,7 @@ export let Activities = (props) => {
           ></input>
           <button onClick={handleSubmitNewActivity}>Submit</button>
         </form>
-      ) : null}
+        : null}
     </div>
   );
 };

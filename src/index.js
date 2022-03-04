@@ -42,7 +42,6 @@ function App() {
           setUserToken={setUserToken}
         />
         <Routes>
-          {/* make homepage idk what we want */}
           <Route path="/Home" element={<HomePage />} />
           <Route
             path="/Routines"

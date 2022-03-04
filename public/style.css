@@ -65,8 +65,8 @@ body {
   flex-direction: column;
   align-items: center;
   position: absolute;
-  top: 450px;
-  left: 650px;
+  top: 110px;
+  left: 400px;
   background-color: rgb(31, 29, 29);
   border-radius: 10%;
 }

@@ -3,17 +3,18 @@
   "version": "1.0.0",
   "description": "an API for our new fitness empire, FitnessTrac.kr, using node, express, and postgresql",
   "main": "index.js",
-  "proxy": "http://localhost:3000",
+
   "scripts": {
     "seed:dev": "nodemon ./db/seed.js",
     "seed": "node ./db/seed.js",
     "start:dev": "nodemon index.js",
-    "start": "node index.js",
+    "start:server": "node index.js",
     "test": "jest --runInBand",
     "test:watch:api": "jest --watchAll api",
     "test:watch": "jest --watchAll --runInBand",
     "test:watch:db": "jest --watchAll db",
-    "start:front": "react-scripts start"
+    "client:build": "react-scripts build",
+    "start": "react-scripts start"
   },
   "repository": {
     "type": "git"

@@ -1,6 +1,6 @@
 // create the express server here
 require('dotenv').config();
-const { PORT = 3000 } = process.env
+const PORT = process.env.PORT || 3000;
 const express = require('express');
 const server = express();
 const morgan = require('morgan');

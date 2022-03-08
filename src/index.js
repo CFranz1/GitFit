@@ -1,21 +1,19 @@
 import { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Header } from "./components/Header/header";
-import {
-  LogInPage,
-  Register,
-} from "./components/Login_Register/Login_RegisterPages";
-import { Routines, MyRoutines } from "./components/Routines/Routines";
+import { Header } from "./components/Header/Header.js";
+import { LogInPage } from "./components/LoginPage/LoginPage.js";
+import { MyRoutinesPage } from "./components/MyRoutinesPage/MyRoutinesPage";
 import { HomePage } from "./components/HomePage/HomePage";
-import { Activities } from "./components/Activities/Activities";
+import { Register} from "./components/RegisterPage/RegisterPage";
+import {RoutinesPage} from "./components/RoutinesPage/RoutinesPage";
+import { ActivitiesPage } from "./components/ActivitiesPage/ActivitiesPage";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userInfo, setUserInfo] = useState({ id: "", username: "" });
   const [userToken, setUserToken] = useState("");
 
-  //tries to pull token and user info set token and user info
   useEffect(() => {
     let retrivedUser = localStorage.getItem("user");
     if (retrivedUser) {
@@ -35,62 +33,14 @@ function App() {
   return (
     <div className="app">
       <BrowserRouter>
-        <Header
-          isLoggedIn={isLoggedIn}
-          setIsLoggedIn={setIsLoggedIn}
-          setUserInfo={setUserInfo}
-          setUserToken={setUserToken}
-        />
+        <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setUserInfo={setUserInfo} setUserToken={setUserToken}/>
         <Routes>
           <Route path="/Home" element={<HomePage />} />
-          <Route
-            path="/Routines"
-            element={
-              <Routines
-                userInfo={userInfo}
-                isLoggedIn={isLoggedIn}
-                userToken={userToken}
-              />
-            }
-          />
-          <Route
-            path="/MyRoutines"
-            element={
-              <MyRoutines
-                userInfo={userInfo}
-                isLoggedIn={isLoggedIn}
-                userToken={userToken}
-              />
-            }
-          />
-          <Route
-            path="/Activities"
-            element={
-              <Activities isLoggedIn={isLoggedIn} userToken={userToken} />
-            }
-          />
-          <Route
-            path="/Login"
-            element={
-              <LogInPage
-                isLoggedIn={isLoggedIn}
-                setIsLoggedIn={setIsLoggedIn}
-                setUserInfo={setUserInfo}
-                setUserToken={setUserToken}
-              />
-            }
-          />
-          <Route
-            path="/Register"
-            element={
-              <Register
-                isLoggedIn={isLoggedIn}
-                setIsLoggedIn={setIsLoggedIn}
-                setUserInfo={setUserInfo}
-                setUserToken={setUserToken}
-              />
-            }
-          />
+          <Route path="/Routines" element={ <RoutinesPage userInfo={userInfo} isLoggedIn={isLoggedIn} userToken={userToken}/>}/> 
+          <Route path="/MyRoutines" element={ <MyRoutinesPage userInfo={userInfo} isLoggedIn={isLoggedIn} userToken={userToken}/>}/>
+          <Route path="/Activities" element={ <ActivitiesPage isLoggedIn={isLoggedIn} userToken={userToken} />} />
+          <Route path="/Login" element={ <LogInPage isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setUserInfo={setUserInfo} setUserToken={setUserToken}/>}/>
+          <Route path="/Register" element={ <Register isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setUserInfo={setUserInfo} setUserToken={setUserToken}/>} />
         </Routes>
       </BrowserRouter>
     </div>

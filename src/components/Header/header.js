@@ -1,4 +1,6 @@
 import { Navigate, NavLink, useNavigate } from "react-router-dom";
+import classes from "./Header.module.css";
+
 
 export let Header = (props) => {
   let { isLoggedIn, setIsLoggedIn, setUserInfo, setUserToken } = props;
@@ -16,22 +18,22 @@ export let Header = (props) => {
   }
 
   return (
-    <div id="Header-Container">
-      <div id="CompanyInfo">
-        <h1 id="CompanySlogan">GIT TOO FIT TO QUIT</h1>
-        <img id="Logo" src={logoImage}></img>
+    <div className={classes.HeaderContainer}>
+      <div className={classes.CompanyInfo}>
+        <h1 className={classes.CompanySlogan}>GIT TOO FIT TO QUIT</h1>
+        <img className={classes.Logo} src={logoImage}></img>
       </div>
       <nav id="Tag-Links">
         <NavLink
           to="/Home"
-          className="Header-Link"
+          className={classes.HeaderLink}
           style={({ isActive }) => (isActive ? activeStyle : undefined)}
         >
           Home
         </NavLink>
         <NavLink
           to="/Routines"
-          className="Header-Link"
+          className={classes.HeaderLink}
           style={({ isActive }) => (isActive ? activeStyle : undefined)}
         >
           Routines
@@ -39,7 +41,7 @@ export let Header = (props) => {
         {isLoggedIn ? (
           <NavLink
             to="/MyRoutines"
-            className="Header-Link"
+            className={classes.HeaderLink}
             style={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
             My Routines
@@ -47,19 +49,19 @@ export let Header = (props) => {
         ) : null}
         <NavLink
           to="/Activities"
-          className="Header-Link"
+          className={classes.HeaderLink}
           style={({ isActive }) => (isActive ? activeStyle : undefined)}
         >
           Activities
         </NavLink>
         {isLoggedIn ? (
-          <NavLink to="/Home" className="Header-Link" onClick={Logout}>
+          <NavLink to="/Home" className={classes.HeaderLink} onClick={Logout}>
             Logout
           </NavLink>
         ) : (
           <NavLink
             to="/Login"
-            className="Header-Link"
+            className={classes.HeaderLink}
             style={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
             Login
@@ -68,7 +70,7 @@ export let Header = (props) => {
         {isLoggedIn ? null : (
           <NavLink
             to="/Register"
-            className="Header-Link"
+            className={classes.HeaderLink}
             style={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
             Register

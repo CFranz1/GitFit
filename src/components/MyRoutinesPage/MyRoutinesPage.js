@@ -1,23 +1,17 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  getAllRoutines,
-  createRoutine,
-  destroyRoutine,
-  editRoutine,
-  getAllActivities,
-  addActivityToRoutine,
-} from "../AjaxHelpers/AjaxHelpers.js";
+import Button from "../../ui/button/Button.js";
+import TextField from "../../ui/TextField/TextField.js";
+import {getAllRoutines, createRoutine,destroyRoutine,editRoutine,getAllActivities,addActivityToRoutine, } from "../AjaxHelpers/AjaxHelpers.js";
 
-export let MyRoutines = (props) => {
+export let MyRoutinesPage = (props) => {
   const { userInfo, isLoggedIn, userToken } = props;
   const [routinesToDisplay, setRoutinesToDisplay] = useState([]);
   const [addingNewRoutine, setAddingNewRoutine] = useState(false);
   const [editingRoutine, setEditingRoutine] = useState(false);
   const [postToEdit, setPostToEdit] = useState({});
   const [allActivities, setAllActivities] = useState([]);
-  const [addingNewActivityToRoutine, setAddingNewActivityToRoutine] =
-    useState(false);
+  const [addingNewActivityToRoutine, setAddingNewActivityToRoutine] = useState(false);
   const fetchData = async () => {
     const allRoutines = await getAllRoutines();
     const allActivities = await getAllActivities();
@@ -61,9 +55,10 @@ export let MyRoutines = (props) => {
       alert(response.error);
     }
   }
-  async function handleEditPost(e) {
+  async function handleEditRoutine(e) {
     e.preventDefault();
     let postId = e.target.id;
+    console.log(postId);
     routinesToDisplay.forEach((element) => {
       if (element.id == postId) setPostToEdit(element);
     });
@@ -94,7 +89,7 @@ export let MyRoutines = (props) => {
       setEditingRoutine(false);
     }
   }
-  async function handleSubmitEditPost(e) {
+  async function handleCancelEditPost(e) {
     e.preventDefault();
     setEditingRoutine(false);
   }
@@ -108,18 +103,14 @@ export let MyRoutines = (props) => {
         </div>
         <form id="UpdatingRoutineForm">
           <h1>What would you like it to be?</h1>
-          <input type="text" id="RoutineName" placeholder="Title" />
-          <input type="text" id="RoutineGoal" placeholder="Goal" />
+          <TextField type="text" id="RoutineName" placeholder="Title" />
+          <TextField type="text" id="RoutineGoal" placeholder="Goal" />
           <div>
             <input type="checkbox" id="isPublic"></input>
             <span>Publish to the public?</span>
           </div>
-          <button onClick={handleSubmitEditPost} type="submit">
-            Submit
-          </button>
-          <button onClick={handleSubmitEditPost} type="submit">
-            Cancel Editing Routine
-          </button>
+          <Button type='submit' onClickHandler={handleSubmitEditPost}>Submit</Button>
+          <Button type='submit' onClickHandler={handleCancelEditPost}>Cancel Editing Routine</Button>
         </form>
       </div>
     );
@@ -139,18 +130,14 @@ export let MyRoutines = (props) => {
     return (
       <form id="NewRoutineForm">
         <h1>New Routine Form</h1>
-        <input type="text" id="RoutineName" placeholder="Title"></input>
-        <input type="text" id="RoutineGoal" placeholder="Goal"></input>
+        <TextField type="text" id="RoutineName" placeholder="Title"/>
+        <TextField type="text" id="RoutineGoal" placeholder="Goal"/>
         <div>
           <input type="checkbox" id="isPublic"></input>
           <span>Publish to the public?</span>
         </div>
-        <button onClick={handleSubmitNewRoutine} type="submit">
-          Submit
-        </button>
-        <button onClick={handleCancelAddNewRoutine} type="submit">
-          Cancel
-        </button>
+        <Button type='submit' onClickHandler={handleSubmitNewRoutine}>Submit</Button>
+        <Button type='submit' onClickHandler={handleCancelAddNewRoutine}>Cancel</Button>
       </form>
     );
   };
@@ -170,7 +157,7 @@ export let MyRoutines = (props) => {
   return (
     <div id="RoutinesPage">
       {isLoggedIn && !addingNewRoutine ? (
-        <button onClick={handleAddNewRoutine}>Add new Routine?</button>
+        <Button onClickHandler={handleAddNewRoutine}>Add new Routine?</Button>
       ) : null}
       {addingNewRoutine ? <NewRoutineForm></NewRoutineForm> : null}
       {filteredPosts.map((element) => {
@@ -182,11 +169,7 @@ export let MyRoutines = (props) => {
               Created By : {element.creatorName}
             </h3>
 
-            <button onClick={renderAddActivityToRoutineFrom}>
-              {!addingNewActivityToRoutine
-                ? `Add Activity to Routine?`
-                : `Cancel`}
-            </button>
+            {!addingNewActivityToRoutine? <Button onClickHandler={renderAddActivityToRoutineFrom}>Add Activity to Routine?</Button> : null }
             {addingNewActivityToRoutine ? (
               <form className="AddActivityToRoutine">
                 <h1>Add activity to Routine</h1>
@@ -199,9 +182,11 @@ export let MyRoutines = (props) => {
                     );
                   })}
                 </select>
-                <input id="count" placeholder="count"></input>
-                <input id="duration" placeholder="duration"></input>
-                <button onClick={handleAddActivityToRoutine}>submit</button>
+                <TextField id="count" placeholder="count"></TextField>
+                <TextField id="duration" placeholder="duration"></TextField>
+                <Button onClickHandler={handleAddActivityToRoutine}>Submit</Button>
+                <Button onClickHandler={renderAddActivityToRoutineFrom}>Cancel</Button>
+
               </form>
             ) : null}
             <h2 className="RoutineInfo b">Activities for This Routine</h2>
@@ -232,70 +217,11 @@ export let MyRoutines = (props) => {
             ) : null}
             {element.creatorId == userInfo.id ? (
               <div id="RoutineButtons">
-                <button onClick={handleEditPost} id={element.id}>
-                  Edit Routine
-                </button>{" "}
-                <button onClick={handleDeletePost} id={element.id}>
-                  Delete Routine
-                </button>
+                <Button onClickHandler={handleEditRoutine} id={element.id}> Edit Routine </Button>{" "}
+                <Button onClickHandler={handleDeletePost} id={element.id}> Delete Routine </Button> </div>) : null} 
               </div>
-            ) : null}
-          </div>
-        );
-      })}
+            );})}
     </div>
   );
 };
 
-export let Routines = (props) => {
-  const [routinesToDisplay, setRoutinesToDisplay] = useState([]);
-
-  const fetchData = async () => {
-    const allRoutines = await getAllRoutines();
-    setRoutinesToDisplay(allRoutines);
-  };
-  useEffect(() => {
-    fetchData();
-  }, []);
-  return (
-    <div id="RoutinesPage">
-      {routinesToDisplay.map((element) => {
-        return (
-          <div className="Single-Routine">
-            {console.log(element)}
-            <h1 className="RoutineInfo a name">{element.name}</h1>
-            <h3 className="RoutineInfo a goal">Goal : {element.goal}</h3>
-            <h3 className="RoutineInfo b creatorName">
-              Created By : {element.creatorName}
-            </h3>
-            <h2 className="RoutineInfo b">Activities for This Routine</h2>
-            {element.activities.length ? (
-              <table className="ActivitiesTable">
-                <tr>
-                  <th className="spacer"></th>
-                  <th>Exercise</th>
-                  <th>Description</th>
-                  <th>Count</th>
-                  <th>Duration</th>
-                  <th className="spacer"></th>
-                </tr>
-                {element.activities.map((element2) => {
-                  return (
-                    <tr className="ActivitiesRow">
-                      <td className="spacer"></td>
-                      <td className="ActivitiesInfo">{element2.name}</td>
-                      <td className="ActivitiesInfo">{element2.description}</td>
-                      <td className="ActivitiesInfo">{element2.count}</td>
-                      <td className="ActivitiesInfo">{element2.duration}</td>
-                      <td className="spacer"></td>
-                    </tr>
-                  );
-                })}
-              </table>
-            ) : null}
-          </div>
-        );
-      })}
-    </div>
-  );
-};

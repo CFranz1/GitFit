@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  getAllActivities,
-  createActivity,
-} from "../AjaxHelpers/AjaxHelpers.js";
+import { getAllActivities, createActivity} from "../AjaxHelpers/AjaxHelpers.js";
 
-export let Activities = (props) => {
+export let ActivitiesPage = (props) => {
   const { isLoggedIn, userToken } = props;
   const [activitiesToDisplay, setActivitiesToDisplay] = useState([]);
   const [isAddingActivities, setIsAddingActivities] = useState([false]);

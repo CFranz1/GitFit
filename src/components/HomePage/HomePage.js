@@ -1,5 +1,5 @@
 import {Link, useNavigate} from "react-router-dom"
-import { logInUser, registerUser } from "../AjaxHelpers/AjaxHelpers.js"
+// import { logInUser, registerUser } from "../AjaxHelpers/AjaxHelpers.js"
 export let HomePage = (props) => {
 
     return (

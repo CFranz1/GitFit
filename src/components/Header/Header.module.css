@@ -1,0 +1,35 @@
+.HeaderContainer {
+    background-color: black;
+    color: #ffa72bee;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: relative;
+    width: 100%;
+  }
+.CompanyInfo {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+  }
+.Logo {
+    margin: 15px;
+  }
+.CompanySlogan {
+    font-family: "Josefin Sans", sans-serif;
+  }
+.HeaderLink {
+    text-decoration: none;
+    color: rgba(245, 245, 245, 0.829);
+    font-size: xx-large;
+    margin: 10px;
+    font-family: "Josefin Sans", sans-serif;
+  }
+.HeaderLink:hover {
+    color: #ffa72bee;
+  }
+.Logo {
+    border-radius: 50%;
+    height: 65px;
+  }

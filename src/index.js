@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Header } from "./components/Header/Header.js";
+import { Header } from "./components/Header/header.js";
 import { LogInPage } from "./components/LoginPage/LoginPage.js";
 import { MyRoutinesPage } from "./components/MyRoutinesPage/MyRoutinesPage";
 import { HomePage } from "./components/HomePage/HomePage";

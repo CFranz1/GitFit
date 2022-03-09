@@ -1,5 +1,6 @@
 // create the express server here
 require('dotenv').config();
+const path = require('path');
 const PORT = process.env.PORT || 3000;
 const express = require('express');
 const server = express();
@@ -33,6 +34,7 @@ server.use((err, req, res, next) => {
   
   
 });
+
 
 server.listen(PORT, () => {
   console.log('The server is up on port', PORT)

@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Header } from "./components/Header/Header.js";
+import { Header } from "./components/Header/Header";
 import { LogInPage } from "./components/LoginPage/LoginPage.js";
 import { MyRoutinesPage } from "./components/MyRoutinesPage/MyRoutinesPage";
 import { HomePage } from "./components/HomePage/HomePage";
-import { Register} from "./components/RegisterPage/RegisterPage";
-import {RoutinesPage} from "./components/RoutinesPage/RoutinesPage";
+import { Register } from "./components/RegisterPage/RegisterPage";
+import { RoutinesPage } from "./components/RoutinesPage/RoutinesPage";
 import { ActivitiesPage } from "./components/ActivitiesPage/ActivitiesPage";
 
 function App() {
@@ -33,14 +33,14 @@ function App() {
   return (
     <div className="app">
       <BrowserRouter>
-        <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setUserInfo={setUserInfo} setUserToken={setUserToken}/>
+        <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setUserInfo={setUserInfo} setUserToken={setUserToken} />
         <Routes>
           <Route path="/Home" element={<HomePage />} />
-          <Route path="/Routines" element={ <RoutinesPage userInfo={userInfo} isLoggedIn={isLoggedIn} userToken={userToken}/>}/> 
-          <Route path="/MyRoutines" element={ <MyRoutinesPage userInfo={userInfo} isLoggedIn={isLoggedIn} userToken={userToken}/>}/>
-          <Route path="/Activities" element={ <ActivitiesPage isLoggedIn={isLoggedIn} userToken={userToken} />} />
-          <Route path="/Login" element={ <LogInPage isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setUserInfo={setUserInfo} setUserToken={setUserToken}/>}/>
-          <Route path="/Register" element={ <Register isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setUserInfo={setUserInfo} setUserToken={setUserToken}/>} />
+          <Route path="/Routines" element={<RoutinesPage userInfo={userInfo} isLoggedIn={isLoggedIn} userToken={userToken} />} />
+          <Route path="/MyRoutines" element={<MyRoutinesPage userInfo={userInfo} isLoggedIn={isLoggedIn} userToken={userToken} />} />
+          <Route path="/Activities" element={<ActivitiesPage isLoggedIn={isLoggedIn} userToken={userToken} />} />
+          <Route path="/Login" element={<LogInPage isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setUserInfo={setUserInfo} setUserToken={setUserToken} />} />
+          <Route path="/Register" element={<Register isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setUserInfo={setUserInfo} setUserToken={setUserToken} />} />
         </Routes>
       </BrowserRouter>
     </div>

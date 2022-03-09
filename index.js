@@ -9,7 +9,7 @@ const cors = require('cors');
 const { client } = require('./db/client');
 server.use(morgan('dev'));
 server.use(cors());
-//i moved connect above apiRouter which i think was the issue
+
 client.connect();
 server.use(express.json())
 

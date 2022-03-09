@@ -8,13 +8,13 @@
     "seed:dev": "nodemon ./db/seed.js",
     "seed": "node ./db/seed.js",
     "start:dev": "nodemon index.js",
-    "start:server": "node index.js",
+    "start": "node index.js",
     "test": "jest --runInBand",
     "test:watch:api": "jest --watchAll api",
     "test:watch": "jest --watchAll --runInBand",
     "test:watch:db": "jest --watchAll db",
     "client:build": "react-scripts build",
-    "start": "react-scripts start"
+    "start:front": "react-scripts start"
   },
   "repository": {
     "type": "git"

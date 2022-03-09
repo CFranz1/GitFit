@@ -2,21 +2,23 @@
 require('dotenv').config();
 const path = require('path');
 
-const PORT = process.env.PORT || 3000;
 const express = require('express');
 const server = express();
+
+const PORT = process.env.PORT || 3000;
+
 const morgan = require('morgan');
+server.use(morgan('dev'));
+
 const bodyParser = require('body-parser')
 const cors = require('cors');
 const { client } = require('./db/client');
-server.use(morgan('dev'));
+
 server.use(cors());
 
 const path = require("path");
 server.use(express.static(path.join(__dirname, "build")));
-server.use((req, res, next) => {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
-});
+
 
 
 client.connect();
@@ -31,7 +33,9 @@ server.use((req, res, next) => {
 const apiRouter = require('./api');
 server.use('/api', apiRouter);
 
-
+server.use((req, res, next) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
 
 server.use((err, req, res, next) => {
   //console.log(error)
@@ -41,6 +45,6 @@ server.use((err, req, res, next) => {
 });
 
 
-server.listen(PORT, () => {
+server.listen(PORT, async () => {
   console.log('The server is up on port', PORT)
 });

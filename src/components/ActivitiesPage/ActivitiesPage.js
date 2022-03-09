@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Button from "../../ui/button/Button.js";
+import TextField from "../../ui/TextField/TextField.js";
 import { getAllActivities, createActivity} from "../AjaxHelpers/AjaxHelpers.js";
+
 
 export let ActivitiesPage = (props) => {
   const { isLoggedIn, userToken } = props;
   const [activitiesToDisplay, setActivitiesToDisplay] = useState([]);
-  const [isAddingActivities, setIsAddingActivities] = useState([false]);
+  const [isAddingActivities, setIsAddingActivities] = useState(false);
   const fetchData = async () => {
     const activities = await getAllActivities();
     setActivitiesToDisplay(activities);
@@ -61,19 +64,17 @@ export let ActivitiesPage = (props) => {
           );
         })}
       </table>
-      {isLoggedIn ? (<button onClick={toggleAddActivityForm}>
-        {!isAddingActivities ? "Add Activity?" : "Cancel"} </button>) : null}
-      {isAddingActivities ?
+      {isLoggedIn ? (<Button onClickHandler={toggleAddActivityForm}>
+        {!isAddingActivities ? "Add Activity?" : "Cancel"} </Button>) : null}
+      {isAddingActivities && isLoggedIn ?
         <form id="AddActivityForm">
           <h1>Create New Activity</h1>
           <h2>Name</h2>
-          <input placeholder="Activity Name" id="ActivityName"></input>
+          <TextField placeholder="Activity Name" id="ActivityName"></TextField>
           <h2>Description</h2>
-          <input
-            placeholder="Activity Description"
-            id="ActivityDescription"
-          ></input>
-          <button onClick={handleSubmitNewActivity}>Submit</button>
+          <TextField placeholder="Activity Description" id="ActivityDescription"></TextField>
+          <Button onClickHandler={handleSubmitNewActivity}>Submit</Button>
+          <Button onClickHandler={toggleAddActivityForm}>Cancel</Button>
         </form>
         : null}
     </div>

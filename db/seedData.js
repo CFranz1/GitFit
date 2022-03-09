@@ -60,11 +60,6 @@ async function createTables() {
   `)
 }
 
-/*
-
-DO NOT CHANGE ANYTHING BELOW. This is default seed data, and will help you start testing, before getting to the tests.
-
-*/
 
 async function createInitialUsers() {
   console.log('Starting to create users...');

@@ -11,16 +11,24 @@ export let MyRoutinesPage = (props) => {
   const [editingRoutine, setEditingRoutine] = useState(false);
   const [postToEdit, setPostToEdit] = useState({});
   const [allActivities, setAllActivities] = useState([]);
-  const [addingNewActivityToRoutine, setAddingNewActivityToRoutine] = useState(false);
+  
   const fetchData = async () => {
-    const allRoutines = await getAllRoutines();
-    const allActivities = await getAllActivities();
-    setAllActivities(allActivities);
-    setRoutinesToDisplay(allRoutines);
+      const allRoutines =  await getAllRoutines();
+      const allActivities =  await getAllActivities();
+      setAllActivities(allActivities);
+      let allRoutinesUpdate = allRoutines.map(element=>{
+        element.isAddingActivity = false;
+        return element
+      })
+      setRoutinesToDisplay(allRoutinesUpdate);
   };
   useEffect(() => {
-    fetchData();
-  }, []);
+      const getData = async () =>{
+        await fetchData();
+      }
+      getData();
+    }, []);
+
   async function handleAddNewRoutine(e) {
     e.preventDefault();
     setAddingNewRoutine(true);
@@ -126,6 +134,7 @@ export let MyRoutinesPage = (props) => {
     let response = await addActivityToRoutine(info, userToken);
     fetchData();
   }
+  
   let NewRoutineForm = (props) => {
     return (
       <form id="NewRoutineForm">
@@ -144,15 +153,49 @@ export let MyRoutinesPage = (props) => {
   if (editingRoutine) {
     return <EditingRoutine></EditingRoutine>;
   }
-  function isPostFromUser(element) {
-    return element.creatorId == userInfo.id;
+  function cancelAddActivity(e){
+    e.preventDefault();
+    let routinesUpdated = [...routinesToDisplay];
+    console.log(e.target.id)
+    routinesUpdated[e.target.id].isAddingActivity = false;
+    setRoutinesToDisplay(routinesUpdated);
   }
   function renderAddActivityToRoutineFrom(e) {
     e.preventDefault();
-    if (!addingNewActivityToRoutine) setAddingNewActivityToRoutine(true);
-    else setAddingNewActivityToRoutine(false);
+    let routinesUpdated = [...routinesToDisplay];
+    routinesUpdated[e.target.id].isAddingActivity = true;
+    setRoutinesToDisplay(routinesUpdated);
+  } 
+
+  let addActivityToRoutineForm = (element,index) =>{
+    console.log(element);
+    return (
+    <form className="AddActivityToRoutine">
+      <h1>Add activity to Routine</h1>
+      <select id="activityToAdd" className={element.id}>
+        {allActivities.map((activity) => {
+          let isActivityAlreadyInRoutine = false;
+          element.activities.forEach((routineActivity) => {
+            if (routineActivity.name === activity.name)
+              isActivityAlreadyInRoutine = true
+          })
+          if (isActivityAlreadyInRoutine === true)
+            return
+          return (
+            <option value={activity.id} id={activity.id}>
+              {activity.name}
+            </option>
+          );
+        })}
+      </select>
+      <TextField id="count" placeholder="count"></TextField>
+      <TextField id="duration" placeholder="duration"></TextField>
+      <Button onClickHandler={handleAddActivityToRoutine}>Submit</Button>
+      <Button onClickHandler={cancelAddActivity} id={index}>Cancel</Button>
+    </form>)
   }
-  let filteredPosts = routinesToDisplay.filter(isPostFromUser);
+
+
 
   return (
     <div id="RoutinesPage">
@@ -160,7 +203,11 @@ export let MyRoutinesPage = (props) => {
         <Button onClickHandler={handleAddNewRoutine}>Add new Routine?</Button>
       ) : null}
       {addingNewRoutine ? <NewRoutineForm></NewRoutineForm> : null}
-      {filteredPosts.map((element) => {
+      {routinesToDisplay.map((element, index) => {
+        //wont display routines not made by user
+        if (element.creatorId != userInfo.id)
+          return
+
         return (
           <div className="Single-Routine">
             <h1 className="RoutineInfo b name">{element.name}</h1>
@@ -168,27 +215,7 @@ export let MyRoutinesPage = (props) => {
             <h3 className="RoutineInfo b creatorName">
               Created By : {element.creatorName}
             </h3>
-
-            {!addingNewActivityToRoutine? <Button onClickHandler={renderAddActivityToRoutineFrom}>Add Activity to Routine?</Button> : null }
-            {addingNewActivityToRoutine ? (
-              <form className="AddActivityToRoutine">
-                <h1>Add activity to Routine</h1>
-                <select id="activityToAdd" className={element.id}>
-                  {allActivities.map((activity) => {
-                    return (
-                      <option value={activity.id} id={activity.id}>
-                        {activity.name}
-                      </option>
-                    );
-                  })}
-                </select>
-                <TextField id="count" placeholder="count"></TextField>
-                <TextField id="duration" placeholder="duration"></TextField>
-                <Button onClickHandler={handleAddActivityToRoutine}>Submit</Button>
-                <Button onClickHandler={renderAddActivityToRoutineFrom}>Cancel</Button>
-
-              </form>
-            ) : null}
+            {element.isAddingActivity ? addActivityToRoutineForm(element, index) : <Button onClickHandler={renderAddActivityToRoutineFrom} id={index}>Add Activity to Routine?</Button> }
             <h2 className="RoutineInfo b">Activities for This Routine</h2>
             {element.activities.length ? (
               <table className="ActivitiesTable">

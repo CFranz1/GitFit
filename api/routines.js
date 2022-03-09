@@ -52,9 +52,7 @@ routinesRouter.delete('/:routineId', requireUser, async (req,res,next)=>{
     }
 })
 routinesRouter.post('/:routineId/activities', async (req,res,next)=>{
-    //not sure why but they pass you routineId through the body and the params 
-    //but running api test they routineId's dont match and if you use the one
-    //from the body the test fails.
+    
     let routineId= req.params.routineId;
     let {activityId, count, duration} = req.body;
     let info ={}

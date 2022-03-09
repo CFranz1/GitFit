@@ -259,18 +259,19 @@ async function updateRoutine({id,isPublic,name,goal}){
   }
 }
 async function destroyRoutine(id){
-
-
-
   try {
-    await client.query(`
-    DELETE FROM routines
-    WHERE routines.id = ${id};
-    `)
+
     await client.query(`
     DELETE FROM routineActivities
     WHERE "routineId"=${id};
     `)
+    
+    await client.query(`
+    DELETE FROM routines
+    WHERE routines.id = ${id};
+    `)
+    
+    
   }catch(err){
   console.log('trouble in destroyRoutine', err);
   }

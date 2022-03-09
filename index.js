@@ -12,6 +12,12 @@ const { client } = require('./db/client');
 server.use(morgan('dev'));
 server.use(cors());
 
+const path = require("path");
+server.use(express.static(path.join(__dirname, "build")));
+server.use((req, res, next) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
+
 
 client.connect();
 server.use(express.json())

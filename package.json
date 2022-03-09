@@ -7,14 +7,14 @@
     "seed:dev": "nodemon ./db/seed.js",
     "seed": "node ./db/seed.js",
     "start:dev": "nodemon index.js",
-    "start:server": "node index.js",
+    "start": "node index.js",
+    "postinstall": "npm run client:build",
+    "client:build": "react-scripts build",
     "test": "jest --runInBand",
     "test:watch:api": "jest --watchAll api",
     "test:watch": "jest --watchAll --runInBand",
     "test:watch:db": "jest --watchAll db",
-    "client:build": "react-scripts build",
-    "start": "react-scripts start",
-    "deploy": "serve -s build"
+    "client:dev": "react-scripts start"
   },
   "repository": {
     "type": "git"

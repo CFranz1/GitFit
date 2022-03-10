@@ -1,4 +1,4 @@
-const APIURL = `http://localhost:3000/api`;
+const APIURL = `http://localhost:4000/api`;
 
 //users to do users/me and users/:username/routines
 export async function registerUser(user) {
